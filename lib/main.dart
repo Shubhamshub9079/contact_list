@@ -1,13 +1,17 @@
- import 'dart:typed_data';
- import 'package:flutter/material.dart';
- import 'package:url_launcher/url_launcher.dart';
- import 'package:flutter_contacts/flutter_contacts.dart';
+import 'dart:typed_data';
+import 'package:contact_details/gridviewlist.dart';
+import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_contacts/flutter_contacts.dart';
+import 'package:video_player/video_player.dart';
 
- void main() async {
+
+
+void main() async {
   runApp(const MyApp());
- }
+  }
 
-  class MyApp extends StatelessWidget {
+ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
@@ -17,25 +21,25 @@
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home:BackgroundVideo
+        (),
       debugShowCheckedModeBanner: false,
      );
    }
  }
 
- class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
- }
+}
 
- class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> {
   List<Contact>? contacts;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getContact();
   }
@@ -53,13 +57,13 @@
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title:  Text(
           "Contact List",
-          style: TextStyle(color: Colors.blue),
+          style: TextStyle(color: Colors.blue,fontSize: 25,fontWeight: FontWeight.w700),
         ),
         centerTitle: true,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
+        backgroundColor: Colors.orangeAccent,
+        elevation: 1,
       ),
       body: (contacts) == null
           ? Center(child: CircularProgressIndicator())
@@ -80,11 +84,11 @@
                   onTap: () {
                     if (contacts![index].phones.isNotEmpty) {
                       launch('tel: ${num}');
-                      }
-                    },
-                  );
-                },
-              ),
-          );
-       }
-     }
+                    }
+                  },
+                );
+              },
+            ),
+         );
+      }
+   }
